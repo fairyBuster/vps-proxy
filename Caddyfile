@@ -18,14 +18,6 @@
     reverse_proxy http://176.97.64.112:80
 }
 
-otsentiummap.com, www.otsentiummap.com {
-    import common_proxy
-}
-
-otsentium.com, www.otsentium.com {
-    import common_proxy
-}
-
-otsentdrone.com, www.otsentdrone.com {
+otsentdrone.com, www.otsentdrone.com, app.otsentdrone.com {
     import common_proxy
 }
