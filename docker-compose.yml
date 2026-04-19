@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   caddy:
     image: caddy:2-alpine
@@ -11,15 +10,14 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
       - caddy_config:/config
+      - /var/log/caddy:/var/log/caddy  # ← tambahkan ini
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
     networks:
       - web
-
 networks:
   web:
-
 volumes:
   caddy_data:
   caddy_config:

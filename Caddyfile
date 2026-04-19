@@ -2,6 +2,13 @@
     auto_https off
 }
 
+(common_log) {
+    log {
+        output file /var/log/caddy/access.log
+        format json
+    }
+}
+
 (secure_headers) {
     header {
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
@@ -12,15 +19,29 @@
     }
 }
 
+(ban_bot) {
+    @badbot {
+        header_regexp User-Agent `Browser\d+/`
+    }
+    respond @badbot 403
+}
+
 (common_proxy) {
     import secure_headers
-    reverse_proxy http://176.97.64.112:80
+    import ban_bot
+
+    reverse_proxy http://176.97.64.112:80 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+    }
 }
 
 http://otsentdrone.com http://www.otsentdrone.com http://app.otsentdrone.com {
+    import common_log
     import common_proxy
 }
 
 http://otsentium.com http://www.otsentium.com http://app.otsentium.com {
+    import common_log
     import common_proxy
 }
