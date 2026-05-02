@@ -30,18 +30,18 @@
     import secure_headers
     import ban_bot
 
-    reverse_proxy http://176.97.64.112:80 {
+    reverse_proxy http://15.235.162.136:80 {
         header_up X-Real-IP {remote_host}
         header_up X-Forwarded-For {remote_host}
     }
 }
 
-http://otsentdrone.com http://www.otsentdrone.com http://app.otsentdrone.com {
+http://trivexcapt.com http://www.trivexcapt.com http://app.trivexcapt.com {
     import common_log
     import common_proxy
 }
 
-http://otsentium.com http://www.otsentium.com http://app.otsentium.com {
+http://trivxcapt.com http://www.trivxcapt.com {
     import common_log
     import common_proxy
 }
